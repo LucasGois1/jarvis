@@ -1,0 +1,29 @@
+version: "3"
+
+services:
+  jarvis:
+    build: .
+    container_name: jarvis_app
+    volumes:
+      - .:/go/src
+    ports:
+      - "8081:8080"
+      - "50052:50051"
+    depends_on:
+      - mysql
+
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_DATABASE: jarvis
+      MYSQL_USER: jarvis
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+
+    ports:
+      - 3306:3306
+
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
