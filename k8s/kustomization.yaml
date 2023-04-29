@@ -8,4 +8,4 @@ resources:
 images:
   - name: jarvis
     newName: ${{secrets.DOCKER_USERNAME}}/jarvis
-    newTag: latest
+    newTag: newTag

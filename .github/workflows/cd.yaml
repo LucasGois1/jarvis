@@ -32,3 +32,16 @@ jobs:
         run: |
           cd k8s
           kustomize edit set image jarvis=$DOCKER_USERNAME/jarvis:$GITHUB_SHA
+
+      - name: Commit
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git commit -am "Bump image tag to $GITHUB_SHA"
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          branch: master
