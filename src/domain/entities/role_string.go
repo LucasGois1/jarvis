@@ -8,20 +8,20 @@ func _() {
 	// An "invalid array index" compiler error signifies that the constant values have changed.
 	// Re-run the stringer command to generate them again.
 	var x [1]struct{}
-	_ = x[User-0]
+	_ = x[User-1]
 	_ = x[System-2]
 	_ = x[Assistant-4]
 }
 
 const (
-	_Role_name_0 = "User"
-	_Role_name_1 = "System"
-	_Role_name_2 = "Assistant"
+	_Role_name_0 = "user"
+	_Role_name_1 = "system"
+	_Role_name_2 = "assistant"
 )
 
 func (i Role) String() string {
 	switch {
-	case i == 0:
+	case i == 1:
 		return _Role_name_0
 	case i == 2:
 		return _Role_name_1

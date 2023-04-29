@@ -21,7 +21,7 @@ type ChatConfig struct {
 type Status int
 
 const (
-	Ended Status = iota << 1
+	Ended Status = 1 << iota
 	Active
 	ValidStatus = Ended | Active
 )
@@ -67,16 +67,16 @@ func NewChat(UserID string, chatConfig *ChatConfig, initialSystemMessage *Messag
 }
 
 func (c *Chat) validate() error {
-	if c.Status&ValidStatus > 0 {
-		return errors.New("invalid status: " + fmt.Sprint(c.Status))
+	if c.Status&ValidStatus == 0 {
+		return errors.New("chat validation invalid status: " + fmt.Sprint(c.Status))
 	}
 
 	if c.Config == nil {
-		return errors.New("invalid chat config: " + fmt.Sprint(c.Config))
+		return errors.New("chat validation invalid chat config: " + fmt.Sprint(c.Config))
 	}
 
 	if c.InitialSystemMessage == nil {
-		return errors.New("invalid initial system message: " + fmt.Sprint(c.InitialSystemMessage))
+		return errors.New("chat validation invalid initial system message: " + fmt.Sprint(c.InitialSystemMessage))
 	}
 
 	return nil
@@ -84,21 +84,19 @@ func (c *Chat) validate() error {
 
 func (c *Chat) AddMessage(message *Message) error {
 	if c.Status == Ended {
-		return errors.New("chat is closed")
+		return errors.New("chat validation chat is closed")
 	}
 
 	for {
-		if (message.Tokens + c.TokenUsage) > c.Config.Model.MaxTokens {
-			c.Messages = c.Messages[1:]
+		if c.Config.Model.MaxTokens >= (message.Tokens + c.TokenUsage) {
+			c.Messages = append(c.Messages, message)
 			c.refreshTokenUsage()
 			break
 		}
+		c.HistoricalMessages = append(c.HistoricalMessages, c.Messages[0])
+		c.Messages = c.Messages[1:]
+		c.refreshTokenUsage()
 	}
-
-	c.Messages = append(c.Messages, message)
-	c.HistoricalMessages = append(c.HistoricalMessages, message)
-	c.refreshTokenUsage()
-
 	return nil
 }
 

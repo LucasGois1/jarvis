@@ -12,7 +12,7 @@ import (
 type Role int
 
 const (
-	User Role = iota << 1
+	User Role = 1 << iota
 	System
 	Assistant
 	ValidRoles = User | System | Assistant
@@ -20,11 +20,11 @@ const (
 
 func NewRole(role string) (Role, error) {
 	switch role {
-	case "User":
+	case "user":
 		return User, nil
-	case "System":
+	case "system":
 		return System, nil
-	case "Assistant":
+	case "assistant":
 		return Assistant, nil
 	default:
 		return -1, errors.New("invalid role: " + role)
@@ -60,20 +60,20 @@ func NewMessage(role Role, content string, model *Model) (*Message, error) {
 }
 
 func (m *Message) validate() error {
-	if m.Role&ValidRoles > 0 {
-		return errors.New("invalid role: " + fmt.Sprint(m.Role))
+	if m.Role&ValidRoles == 0 {
+		return errors.New("message validation invalid role: " + fmt.Sprint(m.Role))
 	}
 
 	if m.CreatedAt.IsZero() {
-		return errors.New("invalid created_at: " + m.CreatedAt.String())
+		return errors.New("message validation invalid created_at: " + m.CreatedAt.String())
 	}
 
 	if m.Model == nil {
-		return errors.New("invalid model: " + fmt.Sprint(m.Model))
+		return errors.New("message validation invalid model: " + fmt.Sprint(m.Model))
 	}
 
 	if m.Tokens > m.Model.MaxTokens {
-		return errors.New("max tokens exceeded")
+		return errors.New("message validation max tokens exceeded")
 	}
 
 	return nil
