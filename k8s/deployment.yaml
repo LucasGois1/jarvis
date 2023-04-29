@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapjarvis
+spec:
+  selector:
+    matchLabels:
+      app: jarvis
+  template:
+    metadata:
+      labels:
+        app: jarvis
+    spec:
+      containers:
+      - name: jarvis
+        image: jarvis
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 8080
+        - containerPort: 50051

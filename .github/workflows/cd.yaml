@@ -20,3 +20,15 @@ jobs:
           password: ${{secrets.DOCKER_PASSWORD}}
           repository: ${{secrets.DOCKER_USERNAME}}/jarvis
           tags: ${{github.sha}}, latest
+
+      - name: Setup Kustomize
+        uses: imranismail/setup-kustomize@v1
+        with:
+          version: "3.6.1"
+
+      - name: Update k8s resources
+        env:
+          DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        run: |
+          cd k8s
+          kustomize edit set image jarvis=$DOCKER_USERNAME/jarvis:$GITHUB_SHA
