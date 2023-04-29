@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build ans push image to Dockerhub
+      - name: Build and push image to Dockerhub
         uses: docker/build-push-action@v1.1.0
         with:
           username: ${{secrets.DOCKER_USERNAME}}
