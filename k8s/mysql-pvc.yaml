@@ -2,13 +2,10 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: mysql-pv-claim
-  namespace: default
-  labels:
-    app: jarvis
 spec:
+  storageClassName: manual
   accessModes:
     - ReadWriteOnce
-  storageClassName: manual
   resources:
     requests:
-      storage: 5Gi
+      storage: 20Gi

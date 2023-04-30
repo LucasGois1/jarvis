@@ -1,45 +1,35 @@
-apiVersion: apps/v1
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: jarvis-mysql
-  labels:
-    app: jarvis
+  name: mysql
 spec:
   selector:
     matchLabels:
-      app: jarvis
-      tier: mysql
+      app: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: jarvis
-        tier: mysql
+        app: mysql
     spec:
       containers:
-        - image: mysql:5.7
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: root
+        ports:
+        - containerPort: 3306
           name: mysql
-          env:
-            - name: MYSQL_DATABASE
-              value: jarvis
-            - name: MYSQL_PASSWORD
-              value: root
-            - name: MYSQL_ROOT_PASSWORD
-              value: root
-            - name: MYSQL_USER
-              value: jarvis
-          ports:
-            - containerPort: 3306
-          resources:
-            limits:
-              memory: "1024Mi"
-              cpu: "1500m"
-          volumeMounts:
-            - mountPath: /var/lib/mysql/
-              name: mysql-persistence-storage
-      restartPolicy: Always
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+        resources:
+          requests:
+            memory: "1024Mi"
+            cpu: "1500m"
       volumes:
-        - name: mysql-persistence-storage
-          persistentVolumeClaim:
-            claimName: mysql-pv-claim
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
