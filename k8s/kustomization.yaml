@@ -12,4 +12,4 @@ resources:
 images:
 - name: jarvis
   newName: lucasgoisdev/jarvis
-  newTag: 7b8b0bc03f6934d541b92b1163a4071c413349b8
+  newTag: 0705b7677f942c564ef24d830e4feb70b7daa97c
