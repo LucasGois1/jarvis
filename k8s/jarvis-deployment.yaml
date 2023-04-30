@@ -1,26 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.28.0 (HEAD)
-  labels:
-    io.kompose.service: jarvis
   name: jarvis
 spec:
   replicas: 1
   selector:
     matchLabels:
       io.kompose.service: jarvis
-  strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.cmd: kompose convert
-        kompose.version: 1.28.0 (HEAD)
       labels:
-        io.kompose.network/jarvis-default: "true"
-        io.kompose.service: jarvis
+        app: jarvis
     spec:
       containers:
         - image: jarvis
@@ -33,4 +23,4 @@ spec:
               memory: "128Mi"
               cpu: "500m"
       restartPolicy: Always
-status: {}
+

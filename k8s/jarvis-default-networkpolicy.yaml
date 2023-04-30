@@ -7,7 +7,11 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              io.kompose.network/jarvis-default: "true"
+              app: jarvis
+        - podSelector:
+            matchLabels:
+              app: mysql
   podSelector:
     matchLabels:
-      io.kompose.network/jarvis-default: "true"
+      app: jarvis
+

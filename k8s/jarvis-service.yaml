@@ -1,11 +1,8 @@
 apiVersion: v1
 kind: Service
 metadata:
-  annotations:
-    kompose.cmd: kompose convert
-    kompose.version: 1.28.0 (HEAD)
   labels:
-    io.kompose.service: jarvis
+    app: jarvis
   name: jarvis
 spec:
   ports:
@@ -16,6 +13,5 @@ spec:
       port: 50052
       targetPort: 50051
   selector:
-    io.kompose.service: jarvis
-status:
-  loadBalancer: {}
+    app: jarvis
+
