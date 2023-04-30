@@ -8,7 +8,7 @@ metadata:
     io.kompose.service: jarvis
   name: jarvis
 spec:
-  type: LoadBalancer
+  type: NodePort
   externalIPs:
    - 172.29.0.0
   ports:
