@@ -7,7 +7,6 @@ resources:
 - jarvis-default-networkpolicy.yaml
 - mysql-deployment.yaml
 - mysql-service.yaml
-- mysql-pv.yaml
 - mysql-pvc.yaml
 
 images:
