@@ -39,8 +39,8 @@ spec:
             - containerPort: 3306
           resources:
             limits:
-              memory: "128Mi"
-              cpu: "500m"
+              memory: "512Mi"
+              cpu: "1500m"
           volumeMounts:
             - mountPath: /var/lib/mysql
               name: mysql-persistence-storage
