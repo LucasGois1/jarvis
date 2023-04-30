@@ -36,7 +36,7 @@ spec:
               memory: "1024Mi"
               cpu: "1500m"
           volumeMounts:
-            - mountPath: /var/lib/mysql
+            - mountPath: /var/lib/mysql/
               name: mysql-persistence-storage
       restartPolicy: Always
       volumes:
