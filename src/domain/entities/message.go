@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	tiktoken_go "github.com/j178/tiktoken-go"
+	"github.com/pkoukk/tiktoken-go"
 )
 
 type Role int
@@ -41,7 +41,9 @@ type Message struct {
 }
 
 func NewMessage(role Role, content string, model *Model) (*Message, error) {
-	totalTokens := tiktoken_go.CountTokens(model.Name, content)
+	var tokenEncoder, _ = tiktoken.GetEncoding("cl100k_base")
+
+	totalTokens := len(tokenEncoder.Encode(content, nil, nil)) + 3
 
 	message := &Message{
 		ID:        uuid.New().String(),

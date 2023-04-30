@@ -7,7 +7,6 @@ require github.com/google/uuid v1.3.0
 require (
 	github.com/go-chi/chi v1.5.4
 	github.com/go-chi/chi/v5 v5.0.8
-	github.com/j178/tiktoken-go v0.2.1
 	github.com/sashabaranov/go-openai v1.9.0
 )
 
@@ -17,8 +16,11 @@ require (
 	google.golang.org/protobuf v1.30.0
 )
 
+require github.com/dlclark/regexp2 v1.8.1 // indirect
+
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
+	github.com/pkoukk/tiktoken-go v0.1.1
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/sys v0.6.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
