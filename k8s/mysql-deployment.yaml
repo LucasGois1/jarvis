@@ -1,17 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: jarvis-mysql
+  labels:
+    app: jarvis
 spec:
   selector:
     matchLabels:
-      app: mysql
+      app: jarvis
+      tier: mysql
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: mysql
+        app: jarvis
+        tier: mysql
     spec:
       containers:
         - image: mysql:latest
