@@ -2,10 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - deployment.yaml
-  - service.yaml
+- deployment.yaml
+- service.yaml
 
 images:
-  - name: jarvis
-    newName: ${{secrets.DOCKER_USERNAME}}/jarvis
-    newTag: newTag
+- name: jarvis
+  newName: lucasgoisdev/jarvis
+  newTag: f4b4c20e5e4bd077beeea6e57241a57d3dba9e08
