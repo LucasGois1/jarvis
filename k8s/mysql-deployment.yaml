@@ -43,10 +43,9 @@ spec:
               cpu: "500m"
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: mysql-claim0
+              name: mysql-persistence-storage
       restartPolicy: Always
       volumes:
-        - name: mysql-claim0
+        - name: mysql-persistence-storage
           persistentVolumeClaim:
-            claimName: mysql-claim0
-status: {}
+            claimName: mysql-pv-claim
