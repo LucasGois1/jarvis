@@ -3,6 +3,7 @@ package entities
 import (
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/google/uuid"
@@ -41,9 +42,18 @@ type Message struct {
 }
 
 func NewMessage(role Role, content string, model *Model) (*Message, error) {
-	var tokenEncoder, _ = tiktoken.GetEncoding("cl100k_base")
+	tokenEncoder, err := tiktoken.EncodingForModel(model.Name)
 
-	totalTokens := len(tokenEncoder.Encode(content, nil, nil)) + 3
+	if err != nil {
+		return nil, fmt.Errorf("error getting encoding for model %s: %w", model.Name, err)
+	}
+
+	tokensPerMessage := 3
+	if strings.HasPrefix(model.Name, "gpt-3.5-turbo") {
+		tokensPerMessage = 4
+	}
+
+	totalTokens := len(tokenEncoder.Encode(content, nil, nil)) + tokensPerMessage
 
 	message := &Message{
 		ID:        uuid.New().String(),

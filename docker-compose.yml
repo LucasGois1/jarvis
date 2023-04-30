@@ -4,8 +4,7 @@ services:
   jarvis:
     build: .
     container_name: jarvis_app
-    volumes:
-      - .:/go/src
+    restart: always
     ports:
       - "8081:8080"
       - "50052:50051"
