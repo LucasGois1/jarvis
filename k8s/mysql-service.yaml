@@ -15,5 +15,4 @@ spec:
   selector:
     io.kompose.service: mysql
     app: mysql
-  clusterIP: None
 
