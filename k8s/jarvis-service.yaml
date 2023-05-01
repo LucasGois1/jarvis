@@ -8,18 +8,13 @@ metadata:
     io.kompose.service: jarvis
   name: jarvis
 spec:
-  type: NodePort
-  externalIPs:
-   - 172.29.0.0
   ports:
     - name: "8081"
       port: 8081
       targetPort: 8080
-      nodePort: 30036
     - name: "50052"
       port: 50052
       targetPort: 50051
-      nodePort: 30037
   selector:
     io.kompose.service: jarvis
 
