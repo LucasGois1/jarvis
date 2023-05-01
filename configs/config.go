@@ -32,7 +32,7 @@ func LoadConfig() (*conf, error) {
 		WebServerPort:      "8080",
 		GRPCServerPort:     "50051",
 		InitialChatMessage: "Seu nome é Jarvis. Você é a inteligência artificial de Lucas Gois. Você da suporte a programadores e arquitetos de software",
-		OpenAIApiKey:       "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",
+		OpenAIApiKey:       "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",
 		Model:              "gpt-3.5-turbo",
 		ModelMaxTokens:     4096,
 		Temperature:        0.2,
