@@ -21,7 +21,7 @@ type conf struct {
 	AuthToken          string   `mapstructure:"AUTH_TOKEN"`
 }
 
-func LoadConfig(path string) (*conf, error) {
+func LoadConfig() (*conf, error) {
 	return &conf{
 		DBDriver:           "mysql",
 		DBHost:             "mysql",
@@ -32,7 +32,7 @@ func LoadConfig(path string) (*conf, error) {
 		WebServerPort:      "8080",
 		GRPCServerPort:     "50051",
 		InitialChatMessage: "Seu nome é Jarvis. Você é a inteligência artificial de Lucas Gois. Você da suporte a programadores e arquitetos de software",
-		OpenAIApiKey:       "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",
+		OpenAIApiKey:       "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",
 		Model:              "gpt-3.5-turbo",
 		ModelMaxTokens:     4096,
 		Temperature:        0.2,
